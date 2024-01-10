@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Connection Status</title>
+</head>
+<body>
+    <h1>Connection Status</h1>
+    <form method="post" action="{% url 'check_connection' %}">
+        {% csrf_token %}
+        <button type="submit">Check Connection</button>
+    </form>
+    <form method="post" action="{% url 'reset_data' %}">
+        {% csrf_token %}
+        <button type="submit">Reset Data</button>
+    </form>
+    <table>
+        <tr>
+            <th>Timestamp</th>
+            <th>Status</th>
+        </tr>
+        {% for status in statuses %}
+            <tr>
+                <td>{{ status.timestamp }}</td>
+                <td>{% if status.connected %}
+                        <span style="color:green">Connected</span>
+                    {% else %}
+                        <span style="color:red">Not Connected</span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
