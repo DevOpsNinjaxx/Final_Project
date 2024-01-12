@@ -41,7 +41,7 @@ Configure additional settings like VPC, Subnet Group, and security group. Make s
 f. Create Database
 Click on "Create database" to launch the RDS instance. Wait for the instance to be created.
 
-4. Configure Django Settings
+### 4. Configure Django Settings
 Edit the settings.py file in the dbconnect app to configure the AWS RDS connection. Update the DATABASES setting with your RDS details:
 
 # dbconnect/settings.py
