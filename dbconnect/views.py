@@ -1,31 +1,27 @@
-from django.shortcuts import redirect, render
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 from .models import ConnectionStatus
-import sqlite3
+from django.db import connection
 
-def check_connection(request):
+def check_connection_rds(request):
     if request.method == 'POST':
-        # Check the database connection
+        # Check the database connection only when the form is submitted
         try:
-            conn = sqlite3.connect('./database.sqlite3')
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT 1")
             connected = True
-            conn.close()
-        except sqlite3.Error:
+        except Exception as e:
             connected = False
-        
-        # Create a new entry when the button is clicked
+
+        # Create a new entry in the ConnectionStatus model
         ConnectionStatus.objects.create(connected=connected)
-        
-        # Redirect to avoid form resubmission on refresh
-        return HttpResponseRedirect('/check/')
 
     # Retrieve all statuses from the database
     statuses = ConnectionStatus.objects.all().order_by('-timestamp')
-    
+
     return render(request, 'dbconnect/index.html', {'statuses': statuses})
 
 def reset_data(request):
     # Delete all entries from the ConnectionStatus model
     ConnectionStatus.objects.all().delete()
-    # Redirect back to the check_connection view after reset
-    return redirect('check_connection')
+    # Redirect back to the check_connection_rds view after reset
+    return redirect('check_connection_rds')

@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Connection Status</h1>
-    <form method="post" action="{% url 'check_connection' %}">
+    <form method="post" action="{% url 'check_connection_rds' %}">
         {% csrf_token %}
         <button type="submit">Check Connection</button>
     </form>
@@ -20,7 +20,7 @@
         </tr>
         {% for status in statuses %}
             <tr>
-                <td>{{ status.timestamp }}</td>
+                <td>{{ status.timestamp|date:"Y-m-d H:i:s" }}</td>
                 <td>{% if status.connected %}
                         <span style="color:green">Connected</span>
                     {% else %}
