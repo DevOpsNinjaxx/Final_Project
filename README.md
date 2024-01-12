@@ -14,8 +14,8 @@ Before setting up and running the application, make sure you have the following 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/django-aws-rds-connection-checker.git
-cd django-aws-rds-connection-checker
+git clone https://github.com/DevOpsNinjaxx/Final_Project.git
+cd Final_Project
 ```
 ### 2. Install Dependencies
 ```bash
