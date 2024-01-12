@@ -8,7 +8,6 @@ Before setting up and running the application, make sure you have the following 
 
 - Python
 - Django
-- AWS CLI
 
 ## Setup
 
